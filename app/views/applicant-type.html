@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Are you applying for the UK domestic industry?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["applicant-type"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["applicant-type"], href: "#applicant-type" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "applicant-type",
+      fieldset: {
+        legend: {
+          text: "Are you applying for the UK domestic industry?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "You must represent UK producers of goods like the imported goods." },
+      errorMessage: errors["applicant-type"] if errors else null,
+      value: data["applicant-type"],
+      items: [
+        { value: "yes-i-represent-uk-producers", text: "Yes, I represent UK producers" },
+        { value: "no-i-m-applying-as-an-individual-company", text: "No, I'm applying as an individual company" },
+        { value: "no-i-m-applying-on-behalf-of-someone-else", text: "No, I'm applying on behalf of someone else" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
