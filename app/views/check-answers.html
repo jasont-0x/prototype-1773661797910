@@ -1,0 +1,156 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers before sending" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "Are you applying for the UK domestic industry?" },
+        value: { text: data["applicant-type"] if data["applicant-type"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/applicant-type",
+            text: "Change",
+            visuallyHiddenText: "are you applying for the uk domestic industry?"
+          }]
+        }
+      },
+      {
+        key: { text: "What percentage of UK production do supporting producers represent?" },
+        value: { text: data["industry-support-percentage"] if data["industry-support-percentage"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/industry-support-percentage",
+            text: "Change",
+            visuallyHiddenText: "what percentage of uk production do supporting producers represent?"
+          }]
+        }
+      },
+      {
+        key: { text: "Do supporters make up more than 50% of producers with a view?" },
+        value: { text: data["support-opposition-ratio"] if data["support-opposition-ratio"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/support-opposition-ratio",
+            text: "Change",
+            visuallyHiddenText: "do supporters make up more than 50% of producers with a view?"
+          }]
+        }
+      },
+      {
+        key: { text: "Do you make goods similar to the imported goods?" },
+        value: { text: data["like-goods-confirmation"] if data["like-goods-confirmation"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/like-goods-confirmation",
+            text: "Change",
+            visuallyHiddenText: "do you make goods similar to the imported goods?"
+          }]
+        }
+      },
+      {
+        key: { text: "Does a major manufacturing step happen in the UK?" },
+        value: { text: data["uk-manufacturing-process"] if data["uk-manufacturing-process"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/uk-manufacturing-process",
+            text: "Change",
+            visuallyHiddenText: "does a major manufacturing step happen in the uk?"
+          }]
+        }
+      },
+      {
+        key: { text: "What harm are the imported goods causing?" },
+        value: { text: data["material-injury-type"] if data["material-injury-type"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/material-injury-type",
+            text: "Change",
+            visuallyHiddenText: "what harm are the imported goods causing?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your company name?" },
+        value: { text: data["company-name"] if data["company-name"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/company-name",
+            text: "Change",
+            visuallyHiddenText: "what is your company name?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is the main contact person's name?" },
+        value: { text: data["contact-name"] if data["contact-name"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/contact-name",
+            text: "Change",
+            visuallyHiddenText: "what is the main contact person's name?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is the main contact's email address?" },
+        value: { text: data["contact-email"] if data["contact-email"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/contact-email",
+            text: "Change",
+            visuallyHiddenText: "what is the main contact's email address?"
+          }]
+        }
+      },
+      {
+        key: { text: "Describe the goods you want investigated" },
+        value: { text: data["product-description"] if data["product-description"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/product-description",
+            text: "Change",
+            visuallyHiddenText: "describe the goods you want investigated"
+          }]
+        }
+      },
+      {
+        key: { text: "Which countries are the dumped goods exported from?" },
+        value: { text: data["exporting-countries"] if data["exporting-countries"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/exporting-countries",
+            text: "Change",
+            visuallyHiddenText: "which countries are the dumped goods exported from?"
+          }]
+        }
+      },
+      {
+        key: { text: "Do you have financial statements for 3 years?" },
+        value: { text: data["financial-data-available"] if data["financial-data-available"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/financial-data-available",
+            text: "Change",
+            visuallyHiddenText: "do you have financial statements for 3 years?"
+          }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
