@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What harm are the imported goods causing?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["material-injury-type"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["material-injury-type"], href: "#material-injury-type" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "material-injury-type",
+      fieldset: {
+        legend: {
+          text: "What harm are the imported goods causing?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      errorMessage: errors["material-injury-type"] if errors else null,
+      value: data["material-injury-type"],
+      items: [
+        { value: "current-material-injury-to-our-business", text: "Current material injury to our business" },
+        { value: "threat-of-material-injury-that-is-likely-to-happen-soon", text: "Threat of material injury that is likely to happen soon" },
+        { value: "no-current-injury-but-unfair-competition", text: "No current injury but unfair competition" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
