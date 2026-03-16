@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Does a major manufacturing step happen in the UK?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["uk-manufacturing-process"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["uk-manufacturing-process"], href: "#uk-manufacturing-process" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "uk-manufacturing-process",
+      fieldset: {
+        legend: {
+          text: "Does a major manufacturing step happen in the UK?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "This must be a key manufacturing step, not just packing or small assembly work." },
+      errorMessage: errors["uk-manufacturing-process"] if errors else null,
+      value: data["uk-manufacturing-process"],
+      items: [
+        { value: "yes-substantial-manufacturing-happens-in-the-uk", text: "Yes, substantial manufacturing happens in the UK" },
+        { value: "no-only-minor-processes-happen-in-the-uk", text: "No, only minor processes happen in the UK" },
+        { value: "all-processes-happen-outside-the-uk", text: "All processes happen outside the UK" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
