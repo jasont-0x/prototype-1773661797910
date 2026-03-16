@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Do supporters make up more than 50% of producers with a view?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["support-opposition-ratio"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["support-opposition-ratio"], href: "#support-opposition-ratio" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "support-opposition-ratio",
+      fieldset: {
+        legend: {
+          text: "Do supporters make up more than 50% of producers with a view?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "Compare producers who support this against those who support plus those who oppose." },
+      errorMessage: errors["support-opposition-ratio"] if errors else null,
+      value: data["support-opposition-ratio"],
+      items: [
+        { value: "yes-supporters-are-more-than-50", text: "Yes, supporters are more than 50%" },
+        { value: "no-supporters-are-50-or-less", text: "No, supporters are 50% or less" },
+        { value: "no-other-producers-have-expressed-a-view", text: "No other producers have expressed a view" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
