@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Do you have financial statements for 3 years?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["financial-data-available"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["financial-data-available"], href: "#financial-data-available" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "financial-data-available",
+      fieldset: {
+        legend: {
+          text: "Do you have financial statements for 3 years?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "You will need to upload these later." },
+      errorMessage: errors["financial-data-available"] if errors else null,
+      value: data["financial-data-available"],
+      items: [
+        { value: "yes-i-have-audited-financial-statements", text: "Yes, I have audited financial statements" },
+        { value: "yes-i-have-management-accounts", text: "Yes, I have management accounts" },
+        { value: "no-i-don-t-have-3-years-of-financial-data", text: "No, I don't have 3 years of financial data" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
