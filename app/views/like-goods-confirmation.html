@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Do you make goods similar to the imported goods?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["like-goods-confirmation"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["like-goods-confirmation"], href: "#like-goods-confirmation" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "like-goods-confirmation",
+      fieldset: {
+        legend: {
+          text: "Do you make goods similar to the imported goods?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "Similar goods have the same physical features, technical properties and uses." },
+      errorMessage: errors["like-goods-confirmation"] if errors else null,
+      value: data["like-goods-confirmation"],
+      items: [
+        { value: "yes-we-produce-very-similar-goods", text: "Yes, we produce very similar goods" },
+        { value: "yes-but-our-goods-have-some-differences", text: "Yes, but our goods have some differences" },
+        { value: "no-our-goods-are-quite-different", text: "No, our goods are quite different" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
