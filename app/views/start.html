@@ -1,0 +1,27 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Apply for an anti-dumping investigation" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Apply for an anti-dumping investigation</h1>
+    <p class="govuk-body">Report imports sold at unfairly low prices that harm your UK business.</p>
+    <p class="govuk-body">You will need:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>details of the imported goods</li>
+      <li>evidence of unfairly low prices</li>
+      <li>proof of harm to your business</li>
+      <li>support from other UK producers</li>
+      <li>financial statements for 3 years</li>
+      <li>production and sales data</li>
+    </ul>
+    <p class="govuk-body">It takes around <strong>30 to 45 minutes</strong> to complete.</p>
+    {{ govukButton({
+      text: "Start now",
+      href: "/applicant-type",
+      isStartButton: true
+    }) }}
+  </div>
+</div>
+{% endblock %}
