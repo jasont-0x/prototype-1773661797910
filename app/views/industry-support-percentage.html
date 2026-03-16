@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What percentage of UK production do supporting producers represent?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["industry-support-percentage"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["industry-support-percentage"], href: "#industry-support-percentage" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "industry-support-percentage",
+      fieldset: {
+        legend: {
+          text: "What percentage of UK production do supporting producers represent?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "Include your company and other UK producers who support this application." },
+      errorMessage: errors["industry-support-percentage"] if errors else null,
+      value: data["industry-support-percentage"],
+      items: [
+        { value: "25-or-more-of-total-uk-production", text: "25% or more of total UK production" },
+        { value: "between-10-and-24-of-total-uk-production", text: "Between 10% and 24% of total UK production" },
+        { value: "less-than-10-of-total-uk-production", text: "Less than 10% of total UK production" },
+        { value: "i-don-t-know", text: "I don't know" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
