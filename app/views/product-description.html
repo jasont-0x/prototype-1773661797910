@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Describe the goods you want investigated" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["product-description"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["product-description"], href: "#product-description" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukTextarea({
+      id: "product-description",
+      name: "product-description",
+      label: {
+        text: "Describe the goods you want investigated",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "Include technical details, uses, and how they compare to your UK goods." },
+      errorMessage: errors["product-description"] if errors else null,
+      value: data["product-description"],
+      rows: 5
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
