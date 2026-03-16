@@ -1,0 +1,10 @@
+{
+  "serviceName": "Apply for an anti-dumping investigation",
+  "serviceUrl": "/start",
+  "useAuth": false,
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}
