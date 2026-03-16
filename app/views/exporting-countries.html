@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Which countries are the dumped goods exported from?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["exporting-countries"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["exporting-countries"], href: "#exporting-countries" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukTextarea({
+      id: "exporting-countries",
+      name: "exporting-countries",
+      label: {
+        text: "Which countries are the dumped goods exported from?",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "List all countries where you think dumping is happening." },
+      errorMessage: errors["exporting-countries"] if errors else null,
+      value: data["exporting-countries"],
+      rows: 5
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
